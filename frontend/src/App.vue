@@ -1,6 +1,8 @@
 <script setup lang=ts>
 
 import { ref, computed } from 'vue';
+import AddTodo from './components/AddTodo.vue';
+
 
 const name = ref('Vue 3 with TypeScript');
 type Todo = { id: number; title: string; completed: boolean };
@@ -14,17 +16,26 @@ const todos = ref<Todo[]>([
 const unfinishedTodos = computed(
   () => todos.value.filter((todo) => !todo.completed)
 );
+
+
+function addTodo(){
+  const title = newTitle.value;
+  todos.value.push({id: nextId.value++, title, completed: false});
+  newTitle.value = '';  
+}
+
 </script>
 
 <template>
   <div id="app">
+    <section class="todo-app">
     <h2>Todos({{unfinishedTodos.length}})</h2>
 
     <ul>
       <li
       v-for="todo in todos"
       :key="todo.id"
-      styel="display: flex; align-items: center; gap: 0.5rem; margin:0.25rem 0;"
+      style="display: flex; align-items: center; gap: 0.5rem; margin:0.25rem 0;"
       >
       <input type="checkbox" v-model="todo.completed" />
       <span :style="{ textDecoration: todo.completed ? 'line-through' : 'none' }">
@@ -32,5 +43,11 @@ const unfinishedTodos = computed(
       </span>   
       </li>
     </ul>
+  </section>
+
+  <AddTodo v-model:todos="todos" />
+
   </div>
+
+
 </template>
