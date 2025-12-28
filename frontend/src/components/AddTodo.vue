@@ -13,13 +13,18 @@
 </script>
 
 <template>
+  <section>
     <h2>New Todo</h2>
     <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.25rem 0;">
       <input
-        v-model="model.todos"
+        v-model="newTitle"
         placeholder="new Title"
         aria-label="new todo title"
       />
       <button v-on:click="addTodo" :disabled="!newTitle">Add</button>
     </div>
+
+
+  </section>
+    
 </template>

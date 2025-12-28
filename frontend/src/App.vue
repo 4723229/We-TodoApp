@@ -18,11 +18,6 @@ const unfinishedTodos = computed(
 );
 
 
-function addTodo(){
-  const title = newTitle.value;
-  todos.value.push({id: nextId.value++, title, completed: false});
-  newTitle.value = '';  
-}
 
 </script>
 
@@ -43,6 +38,8 @@ function addTodo(){
       </span>   
       </li>
     </ul>
+
+    
   </section>
 
   <AddTodo v-model:todos="todos" />
