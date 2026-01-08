@@ -1,30 +1,23 @@
 <script setup lang=ts>
-    import { ref } from 'vue';
-    const todos = defineModel("todos");
+  import AddTodoForm from './AddTodoForm.vue';
+  import { useTodoStore } from '../stores/todoStore';
+  import { ref } from 'vue';
 
-    const newTitle = ref('');
-    const nextId= ref(Math.max(0, ...todos.value.map(todo => todo.id))+1);
+  const todosStore = useTodoStore();
 
-    function addTodo(){
-        todos.value.push({ id: nextId.value++, title: newTitle.value, completed: false });
-        newTitle.value = '';
-    }
-
+  const newTitle = ref<string>('');
 </script>
 
 <template>
   <section>
     <h2>New Todo</h2>
-    <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.25rem 0;">
-      <input
-        v-model="newTitle"
-        placeholder="new Title"
-        aria-label="new todo title"
-      />
-      <button v-on:click="addTodo" :disabled="!newTitle">Add</button>
+    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem 0;">
+      <input 
+       type="text" 
+       v-model="newTitle" 
+       placeholder="New Todo title" 
+       aria-label="New Todo title"/>
+      <button v-on:click="todosStore.addTodo(newTitle)" :disabled="!newTitle">Add</button>
     </div>
-
-
   </section>
-    
 </template>
