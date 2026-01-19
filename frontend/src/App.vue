@@ -1,14 +1,29 @@
 <script setup lang=ts>
 
+import { ref } from 'vue';
 import AddTodo from './components/AddTodo.vue';
 import { useTodoStore } from './stores/todoStore';
+import { RouterView, RouterLink } from 'vue-router';
 
 const todoStore = useTodoStore()
 </script>
 
 <template>
   <div id="app">
-    <section class="todo-app">
+    <header>
+      <h1>Todo App</h1>
+    </header>
+    <main id="main-content">
+      <RouterView/>
+    </main>
+
+    <footer>
+      <ul>
+        <li><routerLink to="/">Home</routerLink></li>
+        <li><routerLink to="/about">About</routerLink></li>
+      </ul>
+    </footer>
+    <!-- <section class="todo-app">
     <h2>Todos</h2>
     <ul>
       <li
@@ -25,9 +40,13 @@ const todoStore = useTodoStore()
     </ul>
   </section>
 
-  <AddTodo/>
+  <AddTodo/> -->
 
   </div>
 
 
 </template>
+
+<style scoped>
+#main-content { padding: 1rem; border-style: solid; border-width:2px;}
+</style>
